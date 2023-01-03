@@ -1,0 +1,9 @@
+//CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-client-SSD_SERVICE_ID_sd_W0wfhB2v32MRQotY
+import { client as SSD_SERVICE_ID_sd_W0wfhB2v32MRQotY } from './sd-services/client';
+
+export const UserRoutes = [
+    //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-client-SSD_SERVICE_ID_sd_W0wfhB2v32MRQotY
+SSD_SERVICE_ID_sd_W0wfhB2v32MRQotY,
+];
