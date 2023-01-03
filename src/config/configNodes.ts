@@ -38,7 +38,11 @@ export default {
                 }
             },
             "__n_excludedFromValidation__": {},
-            "users": {}
+            "users": {
+                "SSD_SERVICE_ID_sd_W0wfhB2v32MRQotY": [
+                    "sd_AXlif8SJU5uH8sRD"
+                ]
+            }
         }
     }
 }

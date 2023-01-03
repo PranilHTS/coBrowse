@@ -167,7 +167,7 @@ export class client {
       let db;
       let dbName;
       let databaseClient;
-      if (true) {
+      if (false) {
         databaseClient = new MongoClient(this.mongoConfig.mongoDatabaseURL);
         dbName = this.mongoConfig.mongoDatabaseName;
         await databaseClient.connect();
@@ -223,7 +223,7 @@ export class client {
             }
           });
 
-          if (true) {
+          if (false) {
             const collection = db.collection(
               this.mongoConfig.mongoCollectionName
             );
@@ -264,7 +264,8 @@ export class client {
               if (
                 filteredDocs[0] &&
                 filteredDocs[0].sessionAnalytics &&
-                filteredDocs[0].sessionAnalytics.sessionStartTime
+                filteredDocs[0].sessionAnalytics.sessionStartTime &&
+                filteredDocs[0].coBrowseStartTime === 0
               ) {
                 analyticsCollection.updateOne(
                   { _id: coBrowseStartData.sessionId },
@@ -278,13 +279,15 @@ export class client {
                 );
               }
             });
-            client.on('CoBrowseAnalyticsDataGet', async () => {
+            client.on('CoBrowseAnalyticsDataGet', async (formId) => {
               const analyticsCollection = db.collection(
                 'HTSCobrowseAnalyticsInfo'
               );
-              const estimate =
-                await analyticsCollection.estimatedDocumentCount();
+              const estimate = await analyticsCollection.db.collection
+                .find({ formId: formId })
+                .count();
               const monthlySessions = analyticsCollection.aggregate([
+                { $match: { formId: formId } },
                 {
                   $group: {
                     _id: { $month: '$createdAt' },
@@ -298,6 +301,7 @@ export class client {
               }
 
               const sessionTotalTime = analyticsCollection.aggregate([
+                { $match: { formId: formId } },
                 {
                   $group: {
                     _id: null,
@@ -319,6 +323,7 @@ export class client {
               for await (const doc of allInputNames) {
                 let fieldData = { fieldName: doc, statistics: '' };
                 let fieldDataStatistics = await analyticsCollection.aggregate([
+                  { $match: { formId: formId } },
                   {
                     $group: {
                       _id: null,
@@ -335,6 +340,7 @@ export class client {
                 allInputNamesData.push(doc);
               }
               const coBrowseStartAvgTime = analyticsCollection.aggregate([
+                { $match: { formId: formId } },
                 {
                   $group: {
                     _id: null,
@@ -367,7 +373,7 @@ export class client {
   }
 
   async getDatabaseSubscriber(type) {
-    if (true) {
+    if (false) {
       const client = new MongoClient(this.mongoConfig.mongoDatabaseURL);
       const dbName = this.mongoConfig.mongoDatabaseName;
       await client.connect();
@@ -405,7 +411,7 @@ export class client {
   }
 
   getMongoSubscriber(type, collection) {
-    if (true) {
+    if (false) {
       let mongoDBSubscriber = new Subject();
       if (type === 'update') {
         if (this.mongoConfig.saveEveryKeyStroke) {
