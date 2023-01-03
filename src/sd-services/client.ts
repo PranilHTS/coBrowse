@@ -14,7 +14,7 @@ import { Middleware } from '../middleware/Middleware'; //_splitter_
 import * as settings from '../config/config'; //_splitter_
 import log from '../utils/Logger'; //_splitter_
 import { Subject } from 'rxjs'; //_splitter_
-import { Server } from 'socket.io'; //_splitter_
+import { Server, } from 'socket.io'; //_splitter_
 import { v4 as uuidv4 } from 'uuid'; //_splitter_
 import { MongoClient } from 'mongodb'; //_splitter_
 import { createAdapter } from '@socket.io/mongo-adapter'; //_splitter_
@@ -367,6 +367,7 @@ export class client {
 
           client.on('disconnect', () => {});
         });
+        console.log(io)
         io.listen(3000);
       });
     });
