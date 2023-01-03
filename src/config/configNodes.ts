@@ -20,7 +20,7 @@ export default {
             "viewType": "server",
             "nodeType": "flow",
             "name": "",
-            "mongoDatabaseURL": "mongodb://localhost:27017",
+            "mongoDatabaseURL": "mongodb+srv://admin:admin@cobrowse.7bhmgyx.mongodb.net/?retryWrites=true&w=majority",
             "mongoDatabaseName": "SocketDatabase",
             "saveEveryKeyStroke": true,
             "expireAfterSeconds": 10000,
